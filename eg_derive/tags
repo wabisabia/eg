@@ -1,0 +1,31 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/Users/wabisabia/dev/me/eg/eg_derive/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20211205.0/
+CustomExpr	src/lib.rs	/^impl Parse for CustomExpr {$/;"	c
+CustomExpr	src/lib.rs	/^struct CustomExpr {$/;"	s
+MyStruct	tests/example.rs	/^    struct MyStruct {$/;"	s	function:named_struct
+MyStruct	tests/example.rs	/^    struct MyStruct(String, usize, isize, f64);$/;"	s	function:unnamed_struct
+MyStruct	tests/example.rs	/^    struct MyStruct;$/;"	s	function:unit_struct
+add_trait_bounds	src/lib.rs	/^fn add_trait_bounds(mut generics: Generics) -> Generics {$/;"	f
+create_eg	src/lib.rs	/^fn create_eg(field: &Field) -> TokenStream {$/;"	f
+custom_expr	src/lib.rs	/^fn custom_expr(field: &Field, attr: &Attribute) -> TokenStream {$/;"	f
+derive_eg	src/lib.rs	/^pub fn derive_eg(input: proc_macro::TokenStream) -> proc_macro::TokenStream {$/;"	f
+example	src/lib.rs	/^fn example(data: Data) -> TokenStream {$/;"	f
+float	tests/example.rs	/^        float: f64,$/;"	m	struct:named_struct::MyStruct
+get_attr	src/lib.rs	/^fn get_attr(field: &Field) -> Option<&Attribute> {$/;"	f
+named_struct	tests/example.rs	/^fn named_struct() {$/;"	f
+parse	src/lib.rs	/^    fn parse(input: ParseStream) -> syn::Result<Self> {$/;"	P	implementation:CustomExpr
+signed_int	tests/example.rs	/^        signed_int: isize,$/;"	m	struct:named_struct::MyStruct
+string	src/lib.rs	/^    string: LitStr,$/;"	m	struct:CustomExpr
+string	tests/example.rs	/^        string: String,$/;"	m	struct:named_struct::MyStruct
+unit_struct	tests/example.rs	/^fn unit_struct() {$/;"	f
+unnamed_struct	tests/example.rs	/^fn unnamed_struct() {$/;"	f
+unsigned_int	tests/example.rs	/^        unsigned_int: usize,$/;"	m	struct:named_struct::MyStruct
