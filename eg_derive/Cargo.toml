@@ -1,22 +1,20 @@
 [package]
 name = "eg_derive"
 version = "0.1.0"
+authors = ["Christian Dunn <bkkchris.dunn@outlook.com>"]
 edition = "2021"
+
+description = "Procedural macros for the eg crate."
+repository = "https://github.com/wabisabia/eg"
+
+license = "MIT OR Apache-2.0"
+keywords = ["example", "dummy", "data", "macro"]
+categories = ["development-tools"]
 
 [lib]
 proc-macro = true
-
-[[test]]
-name = "tests"
-path = "tests/example.rs"
-
-[features]
-test = []
 
 [dependencies]
 proc-macro2 = "1.0.36"
 syn = { version="1.0.86", features=["full", "extra-traits"] }
 quote = "1.0.15"
-
-[dev-dependencies]
-eg = { path = "../eg" }

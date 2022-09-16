@@ -1,2 +1,2 @@
 [workspace]
-members = ["eg", "eg_derive", "eg_test"]
+members = ["eg", "eg_derive"]

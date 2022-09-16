@@ -1,13 +1,15 @@
 [package]
 name = "eg"
 version = "0.1.0"
+authors = ["Christian Dunn <bkkchris.dunn@outlook.com>"]
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "Easy dummy data."
+repository = "https://github.com/wabisabia/eg"
+
+license = "MIT OR Apache-2.0"
+categories = ["development-tools"]
+keywords = ["example", "dummy", "data"]
 
 [dependencies]
-eg_derive = { path = "../eg_derive", optional = true }
-
-[features]
-derive = ["eg_derive"]
-test = ["eg_derive/test"]
+eg_derive = { version = "=0.1.0", path = "../eg_derive" }

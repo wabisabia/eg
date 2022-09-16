@@ -1,32 +1,6 @@
 use eg::Eg;
 
 #[derive(Debug, PartialEq, Eg)]
-struct MyStruct {
-    #[eg = "some other string"]
-    string: String,
-    #[eg = "1 + 3"]
-    num: usize,
-    #[eg = "func"]
-    from_func: Vec<()>,
-}
-
-fn func() -> Vec<()> {
-    vec![()]
-}
-
-#[test]
-fn derive_struct() {
-    assert_eq!(
-        MyStruct {
-            string: "some other string".to_string(),
-            num: 4,
-            from_func: vec![()],
-        },
-        MyStruct::eg()
-    );
-}
-
-#[derive(Debug, PartialEq, Eg)]
 struct Wizard {
     #[eg = "Harry Potter"]
     name: String,
@@ -39,6 +13,7 @@ struct Wizard {
 #[derive(Debug, PartialEq)]
 enum Spell {
     Expelliarmus,
+    #[allow(dead_code)]
     WinguardiumLeviosa,
 }
 
@@ -46,8 +21,7 @@ fn totally_random_spell() -> Spell {
     Spell::Expelliarmus
 }
 
-#[test]
-fn readme_example() {
+fn main() {
     assert_eq!(
         Wizard {
             name: "Harry Potter".to_string(),
@@ -55,5 +29,5 @@ fn readme_example() {
             fav_spell: Spell::Expelliarmus
         },
         Wizard::eg()
-    )
+    );
 }

@@ -1,8 +1,6 @@
-#[cfg(feature = "eg_derive")]
 #[allow(unused_imports)]
 #[macro_use]
 extern crate eg_derive;
-#[cfg(feature = "eg_derive")]
 #[doc(hidden)]
 pub use eg_derive::*;
 
