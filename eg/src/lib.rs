@@ -17,14 +17,14 @@ use std::{
     hash::Hash,
 };
 
-macro_rules! array_impl_eg {
+macro_rules! array_impl {
     ($n:expr, $t:ident $($ts:ident)*) => {
         impl<T> Eg for [T; $n] where T: Eg {
             fn eg() -> Self {
                 [$t::eg(), $($ts::eg()),*]
             }
         }
-        array_impl_eg!{($n - 1), $($ts)*}
+        array_impl!{($n - 1), $($ts)*}
     };
     ($n:expr,) => {
         impl<T> Eg for [T; $n] {
@@ -35,9 +35,9 @@ macro_rules! array_impl_eg {
     }
 }
 
-array_impl_eg! {32, T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T}
+array_impl! {32, T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T}
 
-macro_rules! unsigned_impl_eg {
+macro_rules! unsigned_int_impl {
     ($($ty:ty),+) => {
         $(
             impl Eg for $ty {
@@ -49,9 +49,9 @@ macro_rules! unsigned_impl_eg {
     }
 }
 
-unsigned_impl_eg! {usize, u8, u16, u32, u64, u128}
+unsigned_int_impl! {usize, u8, u16, u32, u64, u128}
 
-macro_rules! signed_impl_eg {
+macro_rules! signed_int_impl {
     ($($ty:ty),+) => {
         $(
             impl Eg for $ty {
@@ -63,7 +63,7 @@ macro_rules! signed_impl_eg {
     }
 }
 
-signed_impl_eg! {isize, i8, i16, i32, i64, i128}
+signed_int_impl! {isize, i8, i16, i32, i64, i128}
 
 macro_rules! float_impl_eg {
     ($($ty:ty),+) => {

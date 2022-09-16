@@ -10,6 +10,9 @@ proc-macro = true
 name = "tests"
 path = "tests/example.rs"
 
+[features]
+test = []
+
 [dependencies]
 proc-macro2 = "1.0.36"
 syn = { version="1.0.86", features=["full", "extra-traits"] }

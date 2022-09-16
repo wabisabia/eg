@@ -2,7 +2,7 @@ use proc_macro2::TokenStream;
 use quote::{quote, quote_spanned};
 use syn::{
     parse::{Parse, ParseStream},
-    parse2, parse_macro_input, parse_quote,
+    parse2, parse_macro_input, parse_quote, parse_str,
     spanned::Spanned,
     AttrStyle, Attribute, Data, DeriveInput, Field, Fields, GenericParam, Generics, Ident, LitStr,
     Token, Type,
@@ -19,7 +19,14 @@ pub fn derive_eg(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 
     let example = example(input.data);
 
+    #[cfg(feature = "test")]
+    let maybe_cfg_test: TokenStream = parse_str("#[cfg(test)]").unwrap();
+
+    #[cfg(not(feature = "test"))]
+    let maybe_cfg_test: TokenStream::new();
+
     let expanded = quote! {
+        #maybe_cfg_test
         impl #impl_generics eg::Eg for #name #ty_generics #where_clause {
             fn eg() -> Self {
                 #example
