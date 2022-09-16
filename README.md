@@ -1,10 +1,13 @@
-# Eg
+Eg: `Default` for dummy data.
+================================
 
-`Default`, but for example data.
+[<img alt="github" src="https://img.shields.io/badge/github-wabisabia/eg-495cbf?style=for-the-badge&labelColor=55555&logo=github">](https://github.com/wabisabia/eg)
+[<img alt="crates.io" src="https://img.shields.io/crates/v/eg?style=for-the-badge&logo=rust">](https://crates.io/crates/eg)
+[<img alt="license" src="https://img.shields.io/crates/l/eg?style=for-the-badge&logo=apache">](https://crates.io/crates/eg)
 
 ## Why Eg?
 
-More instructive documentation:
+Use `Eg` to provide example values:
 
 ```rust
 use eg::Eg;
@@ -52,5 +55,9 @@ fn my_database_test() {
 
 ## Why not a global `const`?
 
-For const-compatible use cases, this is probably an acceptable approach!
-For everything else, there's `Eg` (◕‿◕)
+In `const`-compatible contexts, this is probably an acceptable approach!
+For everything else, there's `Eg` 😉
+
+## Contribution
+
+This crate is still learning to walk; feedback, issues and PRs are all welcome! (◕‿◕)
