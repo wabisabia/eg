@@ -41,29 +41,52 @@ fn add_trait_bounds(mut generics: Generics) -> Generics {
 
 fn example(data: Data) -> TokenStream {
     match data {
-        Data::Struct(data) => match data.fields {
+        Data::Struct(strukt) => match strukt.fields {
+            Fields::Unit => quote!(Self),
             Fields::Named(fields) => {
-                let egs = fields.named.iter().map(create_eg);
-                quote! {
-                    Self {
-                        #(#egs)*
-                    }
-                }
+                let field_egs = fields.named.iter().map(create_eg);
+                quote!(Self {
+                    #(#field_egs)*
+                })
             }
-            Fields::Unnamed(ref fields) => {
+            Fields::Unnamed(fields) => {
                 let examples = fields.unnamed.iter().map(|field| {
                     let ty = &field.ty;
-                    quote_spanned! { field.span() => #ty::eg() }
+                    quote_spanned!(field.span() => #ty::eg())
                 });
-                quote! {
-                    Self(#(#examples),*)
-                }
-            }
-            Fields::Unit => {
-                quote!(Self)
+                quote!(Self(#(#examples),*)
+                )
             }
         },
-        Data::Enum(_) => unimplemented!(),
+        Data::Enum(enumeration) => {
+            let mut tagged_variants = enumeration.variants.iter().filter(|variant| {
+                variant.attrs.iter().any(|attr| {
+                    matches!(attr.style, AttrStyle::Outer)
+                        && matches!(attr.path.get_ident(), Some(ident) if ident == "eg")
+                })
+            });
+            let eg_variant = match tagged_variants.next() {
+                None => &enumeration.variants[0],
+                Some(tagged_variant) => tagged_variant,
+            };
+            if let Some(_) = tagged_variants.next() {
+                panic!("Cannot tag more than one enum variant with `eg`.");
+            }
+            let eg_variant_ident = &eg_variant.ident;
+            match &eg_variant.fields {
+                Fields::Unit => quote!(Self::#eg_variant_ident),
+                Fields::Unnamed(fields) => {
+                    let type_idents = fields.unnamed.iter().map(|field| field.ty.clone());
+                    quote!(Self::#eg_variant_ident(#(#type_idents::eg()),*))
+                }
+                Fields::Named(fields) => {
+                    let field_egs = fields.named.iter().map(create_eg);
+                    quote!(Self::#eg_variant_ident {
+                        #(#field_egs)*
+                    })
+                }
+            }
+        }
         Data::Union(_) => unimplemented!(),
     }
 }
