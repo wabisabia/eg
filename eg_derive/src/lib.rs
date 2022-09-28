@@ -54,8 +54,7 @@ fn example(data: Data) -> TokenStream {
                     let ty = &field.ty;
                     quote_spanned!(field.span() => #ty::eg())
                 });
-                quote!(Self(#(#examples),*)
-                )
+                quote!(Self(#(#examples),*))
             }
         },
         Data::Enum(enumeration) => {
