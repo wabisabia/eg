@@ -86,7 +86,24 @@ fn example(data: Data) -> TokenStream {
                 }
             }
         }
-        Data::Union(_) => unimplemented!(),
+        Data::Union(_union) =>  {
+            let mut tagged_fields = _union.fields.named.iter().filter(|field| {
+                field.attrs.iter().any(|attr| {
+                    matches!(attr.style, AttrStyle::Outer)
+                        && matches!(attr.path.get_ident(), Some(ident) if ident == "eg")
+                })
+            });
+            let eg_field = match tagged_fields.next() {
+                None => panic!("A union must have one field tagged with `eg`."),
+                Some(tagged_variant) => tagged_variant,
+            };
+            if tagged_fields.next().is_some() {
+                panic!("Cannot tag more than one union field with `eg`.");
+            }
+            let field_eg = eg_field.ident.as_ref().unwrap(); // unnamed fields only apply to tuple struct definitions
+            let field_type = &eg_field.ty;
+            quote!(Self { #field_eg: #field_type })
+        }
     }
 }
 
