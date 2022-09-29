@@ -103,7 +103,7 @@ fn example(data: Data) -> TokenStream {
             }
             let field_eg = eg_field.ident.as_ref().unwrap(); // unnamed fields only apply to tuple struct definitions
             let field_type = &eg_field.ty;
-            quote!(Self { #field_eg: #field_type })
+            quote!(Self { #field_eg: #field_type::eg() })
         }
     }
 }
